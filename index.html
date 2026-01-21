@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 26 Wednesday and Thursday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            header { padding: 1rem; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Week 26 Wednesday and Thursday Practice Quiz</h1>
+        <div class="controls-wrapper">
+            <!-- Pin Button -->
+            <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                📍
+            </button>
+            
+            <div class="theme-control">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="dark">Modern Dark</option>
+                    <option value="midnight">Midnight</option>
+                    <option value="light">Modern Light</option>
+                    <option value="legacy-dark">Legacy Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="contrast">High Contrast</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData = [
+            // --- Section 1: Circulatory and Capillary Hemodynamics ---
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 1.1: Explain how pressure gradients affect blood flow.",
+                fullLO: "LO 1.1: Explain how pressure gradients affect blood flow.",
+                question: "A medical student is observing a cardiovascular simulation. The instructor increases the pressure gradient (ΔP) across a vessel while keeping resistance constant. According to Ohm's Law of the circulation, which of the following changes will occur?",
+                options: {
+                    A: "Blood flow will decrease",
+                    B: "Blood flow will increase",
+                    C: "Blood flow will remain constant",
+                    D: "Resistance will increase proportionately",
+                    E: "Turbulence will immediately occur"
+                },
+                correctAnswer: "B",
+                rationale: "Ohm's Law states that Flow (Q) = ΔP/R. Therefore, if the pressure gradient (ΔP) goes up and resistance (R) is constant, flow (Q) goes up.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 12: \"This is the direct effect of blood pressure on blood flow... So, if ΔP goes up, Q goes up.\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 1.1: Explain how pressure gradients affect blood flow.",
+                fullLO: "LO 1.1: Explain how pressure gradients affect blood flow.",
+                question: "A patient presents with severe hypotension (shock). Despite the body's attempts to compensate, the arterial pressure remains critically low. Consequently, blood flow to the kidneys drops significantly, leading to renal failure. This scenario best illustrates which hemodynamic principle?",
+                options: {
+                    A: "Blood flow is inversely proportional to pressure",
+                    B: "Low blood pressure yields low tissue flow",
+                    C: "Resistance decreases as pressure decreases",
+                    D: "Viscosity increases as pressure decreases",
+                    E: "Wall tension increases as pressure decreases"
+                },
+                correctAnswer: "B",
+                rationale: "Ohm's Law indicates that flow is directly proportional to the pressure gradient. In shock, low BP yields low tissue flow, which causes organ failure.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 12: \"One implication: Low BP yields low tissue flow, which is what causes organ failure in shock.\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 1.2: Use Laplace’s Law to explain how vessel radius determines the effect of pressure...",
+                fullLO: "LO 1.2: Use Laplace’s Law to explain how vessel radius determines the effect of pressure on blood vessels, e.g. the rupture of an aortic aneurysm.",
+                question: "A 70-year-old male with an abdominal aortic aneurysm is being monitored. Over the course of a year, his blood pressure remains controlled, but the radius of the aneurysm increases by 1 cm. According to the Law of Laplace, this increase in radius results in:",
+                options: {
+                    A: "Decreased wall tension",
+                    B: "Increased wall tension",
+                    C: "Increased wall thickness",
+                    D: "No change in wall tension",
+                    E: "Reduced risk of rupture"
+                },
+                correctAnswer: "B",
+                rationale: "The Law of Laplace (T=P×r/Δx) states that for a given pressure, wall tension is directly proportional to the radius. An increased radius leads to increased tension, increasing the risk of rupture.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 15: \"Growing radius (r) is why aneurysms rupture, because the same blood pressure (P) now is applied to a larger radius (r), so wall tension (T) increases and rips the vessel\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 1.2: Use Laplace’s Law to explain how vessel radius determines the effect of pressure...",
+                fullLO: "LO 1.2: Use Laplace’s Law to explain how vessel radius determines the effect of pressure on blood vessels, e.g. the rupture of an aortic aneurysm.",
+                question: "Capillaries tolerate relatively high internal pressures without rupturing, despite having extremely thin walls. This structural integrity is best explained by their:",
+                options: {
+                    A: "High elastin content",
+                    B: "Large cross-sectional area",
+                    C: "Low metabolic rate",
+                    D: "Small radius",
+                    E: "Thick smooth muscle layer"
+                },
+                correctAnswer: "D",
+                rationale: "Capillaries do not rupture because their very small radius (r) keeps the wall tension (T) low, even in the face of high pressure (P).",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 15: \"Why don’t the microscopic capillaries rupture? It’s because their lower radius (r) keeps wall tension (T) low in the face of that high pressure (P).\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 2.1: Use Ohm’s and Poiseuille’s Laws to explain the effects of arteriole radius and hematocrit...",
+                fullLO: "LO 2.1: Use Ohm’s and Poiseuille’s Laws to explain the effects of arteriole radius and hematocrit on resistance and blood flow.",
+                question: "A patient with polycythemia vera has a hematocrit of 60%. This increase in red blood cell concentration directly alters hemodynamics by:",
+                options: {
+                    A: "Decreasing blood viscosity",
+                    B: "Decreasing vascular resistance",
+                    C: "Increasing blood viscosity",
+                    D: "Increasing vessel radius",
+                    E: "Reducing cardiac workload"
+                },
+                correctAnswer: "C",
+                rationale: "Viscosity is directly proportional to hematocrit. As hematocrit goes up, viscosity (η) goes up, which increases resistance (Poiseuille's Law).",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 25: \"As hematocrit goes up, viscosity (η) goes up. And Poiseuille's Law says that increased viscosity increases resistance.\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 2.1: Use Ohm’s and Poiseuille’s Laws to explain the effects of arteriole radius and hematocrit...",
+                fullLO: "LO 2.1: Use Ohm’s and Poiseuille’s Laws to explain the effects of arteriole radius and hematocrit on resistance and blood flow.",
+                question: "According to Poiseuille’s Law, which variable has the most profound effect on vascular resistance because it is raised to the fourth power in the equation?",
+                options: {
+                    A: "Blood viscosity",
+                    B: "Pressure gradient",
+                    C: "Vessel length",
+                    D: "Vessel radius",
+                    E: "Vessel wall tension"
+                },
+                correctAnswer: "D",
+                rationale: "In Poiseuille's Law, the radius (r) is raised to the 4th power. Therefore, small changes in radius have major effects on resistance.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 17: \"So, it only takes a small change in vessel radius to have major effects on resistance, and therefore blood flow.\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 2.2: Explain the effect of a change in resistance in one organ...",
+                fullLO: "LO 2.2: Explain the effect of a change in resistance in one organ on its own blood flow, on blood flow in other organs, and on cardiac output.",
+                question: "During an arm workout, the arterioles in the upper extremities dilate to increase local blood flow. Assuming arterial blood pressure is maintained by the body's control systems, what is the effect on blood flow to the kidneys and GI tract?",
+                options: {
+                    A: "Flow to kidneys and GI tract decreases significantly",
+                    B: "Flow to kidneys and GI tract increases to match the arm",
+                    C: "Flow to kidneys and GI tract remains unchanged",
+                    D: "Flow to kidneys and GI tract stops",
+                    E: "Flow becomes turbulent in the abdominal aorta"
+                },
+                correctAnswer: "C",
+                rationale: "Because organs are arranged in parallel circuits, changing resistance and flow in one tissue (the arm) does not affect flow in other tissues (brain, gut, etc.) as long as pressure is maintained.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 29: \"Changing resistance and flow here... ...does not affect flow here, because it’s a parallel circuit!\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 2.2: Explain the effect of a change in resistance in one organ...",
+                fullLO: "LO 2.2: Explain the effect of a change in resistance in one organ on its own blood flow, on blood flow in other organs, and on cardiac output.",
+                question: "A person begins running, causing widespread vasodilation in the arterioles of the leg muscles. According to the principle that cardiac output equals the sum of all tissue blood flows, how does this local change affect total Cardiac Output?",
+                options: {
+                    A: "Cardiac Output decreases due to peripheral pooling",
+                    B: "Cardiac Output decreases due to increased resistance",
+                    C: "Cardiac Output increases",
+                    D: "Cardiac Output remains static",
+                    E: "Cardiac Output fluctuates unpredictably"
+                },
+                correctAnswer: "C",
+                rationale: "Dilation of arterioles increases tissue flow, which increases venous return, which in turn increases cardiac output. Cardiac output equals the sum of all tissue flows.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 4: \"For example, dilation of leg arterioles in exercise increases leg blood flow. This increases venous return, which then increases cardiac output.\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 2.3: Explain the relationship between individual vessel diameter and total cross sectional area...",
+                fullLO: "LO 2.3: Explain the relationship between individual vessel diameter and total cross sectional area to explain why blood velocity is high in blood vessels narrowed with plaque, and low in the very narrow capillaries.",
+                question: "Red blood cells move through capillaries at a much slower velocity than they do through the aorta. This physiological phenomenon allows for adequate time for gas exchange. The primary reason for this low velocity is:",
+                options: {
+                    A: "High resistance of individual capillaries",
+                    B: "Low pressure in the venous system",
+                    C: "The huge total cross-sectional area of the capillary beds",
+                    D: "The small radius of individual capillaries",
+                    E: "Turbulent flow within the capillary"
+                },
+                correctAnswer: "C",
+                rationale: "Velocity = Flow / Area (v=Q/A). Although individual capillaries are small, the total cross-sectional area of all capillaries combined is huge, resulting in low velocity.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 32: \"together (in parallel) they are like 1 giant blood vessel with a huge cross-sectional area. Explains why velocity is lower in capillaries than in the aorta.\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 2.3: Explain the relationship between individual vessel diameter and total cross sectional area...",
+                fullLO: "LO 2.3: Explain the relationship between individual vessel diameter and total cross sectional area to explain why blood velocity is high in blood vessels narrowed with plaque, and low in the very narrow capillaries.",
+                question: "A physician detects a bruit over a patient's carotid artery. An angiogram reveals an atherosclerotic plaque narrowing the vessel lumen. The audible turbulence is caused by increased blood velocity at the site of the stenosis. This increase in velocity is due to:",
+                options: {
+                    A: "Decreased blood viscosity",
+                    B: "Decreased cross-sectional area at the lesion",
+                    C: "Increased arterial compliance",
+                    D: "Increased local blood pressure",
+                    E: "Increased total vessel length"
+                },
+                correctAnswer: "B",
+                rationale: "According to v=Q/A, a decreased radius (due to plaque) decreases the cross-sectional area (A). To maintain flow (Q), velocity (v) must increase.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 33: \"Decreased arterial radius (and area) due to atherosclerotic plaque increases velocity at that site. You can hear the turbulence with your stethoscope.\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 3: Capacitance: Explain effects in arteries versus veins.",
+                fullLO: "LO 3: Capacitance: Explain effects in arteries versus veins.",
+                question: "An 80-year-old patient presents with a blood pressure of 160/70 mmHg. The wide pulse pressure (90 mmHg) is a classic sign of aging. This phenomenon is primarily caused by:",
+                options: {
+                    A: "Decreased arterial compliance",
+                    B: "Decreased cardiac contractility",
+                    C: "Decreased venous return",
+                    D: "Increased blood viscosity",
+                    E: "Increased venous capacitance"
+                },
+                correctAnswer: "A",
+                rationale: "Systolic pressure increases with age because of decreasing arterial compliance (stiffening). This leads to a wider pulse pressure.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 40: \"Systolic pressure increases with age because of decreasing arterial compliance ...systolic hypertension in the elderly.\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 3: Capacitance: Explain effects in arteries versus veins.",
+                fullLO: "LO 3: Capacitance: Explain effects in arteries versus veins.",
+                question: "Which component of the vascular system acts as a reservoir, capable of holding approximately two-thirds of the body's total blood volume due to its high capacitance?",
+                options: {
+                    A: "Aorta and large arteries",
+                    B: "Arterioles",
+                    C: "Capillaries",
+                    D: "Heart chambers",
+                    E: "Large veins (e.g., Vena Cava)"
+                },
+                correctAnswer: "E",
+                rationale: "Large veins are capacitance vessels. They have greater compliance than arteries and can store blood or return it to the heart by changing tone.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 38: \"Capacitance Veins: Large 'storage' veins... They can either 'store' the blood... or return it to the heart\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 4: Capillaries: Be able to determine the change in capillary filtration...",
+                fullLO: "LO 4: Capillaries: Be able to determine the change in capillary filtration in response to changes in capillary hydrostatic pressure (blood pressure), protein concentration, or permeability.",
+                question: "A patient with congestive heart failure presents with bilateral pedal edema. The mechanism for this edema involves \"backed-up\" flow increasing venous pressure. This leads to edema by altering which Starling force?",
+                options: {
+                    A: "Decreasing capillary colloid osmotic pressure (Πc)",
+                    B: "Decreasing interstitial fluid pressure (Pif)",
+                    C: "Increasing capillary hydrostatic pressure (Pc)",
+                    D: "Increasing capillary permeability (Kf)",
+                    E: "Increasing plasma protein concentration"
+                },
+                correctAnswer: "C",
+                rationale: "Increased venous pressure (e.g., heart failure) leads to increased capillary hydrostatic pressure (Pc), which pushes fluid out of the capillary (filtration).",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 45: \"Increased Capillary Pressure (Pc): ... increased venous pressure (e.g. heart failure)\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 4: Capillaries: Be able to determine the change in capillary filtration...",
+                fullLO: "LO 4: Capillaries: Be able to determine the change in capillary filtration in response to changes in capillary hydrostatic pressure (blood pressure), protein concentration, or permeability.",
+                question: "A patient with end-stage liver disease has a significantly reduced ability to synthesize albumin. Which change in Starling forces would be expected in this patient, facilitating the development of edema (ascites)?",
+                options: {
+                    A: "Decreased Capillary Colloid Osmotic Pressure (Πc)",
+                    B: "Decreased Capillary Hydrostatic Pressure (Pc)",
+                    C: "Decreased Capillary Permeability (Kf)",
+                    D: "Increased Interstitial Fluid Pressure (Pif)",
+                    E: "Increased Plasma Colloid Osmotic Pressure (Πc)"
+                },
+                correctAnswer: "A",
+                rationale: "Impaired production of proteins (cirrhosis) leads to a loss of proteins in the blood, decreasing capillary colloid osmotic pressure (Πc). Since \"Π sucks,\" less suction holds fluid in, leading to edema.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 45: \"Decreased Capillary Colloid Osmotic Pressure (Πc): ... impaired production of proteins - cirrhosis\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 5: Edema: explain how interstitial fluid edema can occur.",
+                fullLO: "LO 5: Edema: explain how interstitial fluid edema can occur.",
+                question: "Following surgery for breast cancer which included the removal of lymph nodes, a patient develops lymphedema in the arm. This type of edema occurs because:",
+                options: {
+                    A: "Capillary hydrostatic pressure is too low",
+                    B: "Lymphatic vessels fail to return interstitial fluid and proteins to the circulation",
+                    C: "Plasma proteins are too high, drawing fluid into the tissue",
+                    D: "The heart cannot pump blood to the extremity",
+                    E: "There is an allergic reaction increasing permeability"
+                },
+                correctAnswer: "B",
+                rationale: "One cause of extracellular edema is the failure of lymphatics to return interstitial fluid (and leaked proteins) to the circulation.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 57: \"Causes of Extracellular Edema... Failure of lymphatics to return interstitial fluid to the circulation (e.g. cancer, surgery, infections)\""
+            },
+            {
+                section: "Circulatory and Capillary Hemodynamics",
+                maskedLO: "LO 5: Edema: explain how interstitial fluid edema can occur.",
+                fullLO: "LO 5: Edema: explain how interstitial fluid edema can occur.",
+                question: "A patient experiences an acute allergic reaction to a bee sting, resulting in localized swelling. The primary mechanism for edema in this scenario is:",
+                options: {
+                    A: "Decreased capillary pressure",
+                    B: "Decreased interstitial fluid pressure",
+                    C: "Increased capillary permeability (Kf)",
+                    D: "Increased plasma protein concentration",
+                    E: "Lymphatic obstruction"
+                },
+                correctAnswer: "C",
+                rationale: "Allergic reactions (and toxins/infections) cause increased capillary permeability (Kf), allowing fluid and proteins to leak into the interstitium.",
+                source: "Circulatory_Hemodynamics_and_Mechanisms_for_Edema_PDF.pdf, Page 45: \"Increased Capillary Permeability (Kf): toxins... allergic reactions, etc.\""
+            },
+
+            // --- Section 2: Regulation of Blood Flow & Venous Return ---
+            {
+                section: "Regulation of Blood Flow & Venous Return",
+                maskedLO: "LO 1: Explain how the tissues regulate their own blood flow... (hyperemia vs autoregulation).",
+                fullLO: "LO 1: Explain how the tissues regulate their own blood flow, under conditions where they change their metabolic rate (e.g. hyperemia), and when they are resisting pressure-induced changes (autoregulation).",
+                question: "During rigorous exercise, the metabolic rate of skeletal muscle increases significantly. This leads to an accumulation of vasodilator metabolites that decrease arteriolar resistance to increase blood flow. This process is known as:",
+                options: {
+                    A: "Active Hyperemia",
+                    B: "Autoregulation",
+                    C: "Myogenic constriction",
+                    D: "Reactive Hyperemia",
+                    E: "Sympathetic activation"
+                },
+                correctAnswer: "A",
+                rationale: "Hyperemia describes the tissue \"deciding\" that it needs more flow based on its metabolic rate generating waste products.",
+                source: "Regulation_of_Blood_Flow_and_Venous_Return_PDF.pdf, Page 16: \"Hyperemia describes the tissue 'deciding' that it needs more flow, based on its metabolic rate generating waste products... metabolites decrease arteriolar resistance.\""
+            },
+            {
+                section: "Regulation of Blood Flow & Venous Return",
+                maskedLO: "LO 1: Explain how the tissues regulate their own blood flow... (hyperemia vs autoregulation).",
+                fullLO: "LO 1: Explain how the tissues regulate their own blood flow, under conditions where they change their metabolic rate (e.g. hyperemia), and when they are resisting pressure-induced changes (autoregulation).",
+                question: "When arterial pressure increases, tissues may constrict their arterioles to prevent a surge in blood flow, maintaining flow at a steady level required for metabolism. This resistance to pressure-induced changes is called:",
+                options: {
+                    A: "Autoregulation",
+                    B: "Capacitance",
+                    C: "Compliance",
+                    D: "Hyperemia",
+                    E: "Vasodilation"
+                },
+                correctAnswer: "A",
+                rationale: "Autoregulation describes the tissue resisting pressure-induced changes in blood flow to maintain a level that meets metabolic needs.",
+                source: "Regulation_of_Blood_Flow_and_Venous_Return_PDF.pdf, Pages 11 & 16: \"Autoregulation describes the tissue resisting pressure-induced changes in blood flow... The tissue autoregulates flow back to a level that meets its metabolic needs\""
+            },
+            {
+                section: "Regulation of Blood Flow & Venous Return",
+                maskedLO: "LO 2: Explain how tissue vasodilator metabolites \"battle\" against blood pressure control...",
+                fullLO: "LO 2: Explain how tissue vasodilator metabolites \"battle\" against blood pressure control vasoconstrictor systems to determine flood flow in resting tissue, active tissue, and in shock.",
+                question: "During exercise, the sympathetic nervous system releases norepinephrine to constrict blood vessels globally. However, in the exercising muscles, blood vessels dilate. Why does dilation occur in these active tissues?",
+                options: {
+                    A: "Active muscles do not have sympathetic receptors",
+                    B: "Local metabolic vasodilators overcome sympathetic vasoconstriction",
+                    C: "Sympathetic nerves only innervate veins, not arterioles",
+                    D: "The baroreceptor reflex inhibits sympathetic outflow to muscles",
+                    E: "The heart pumps harder, physically forcing the vessels open"
+                },
+                correctAnswer: "B",
+                rationale: "In exercise, local factors (metabolites) win the battle in the active tissue and dilate, while the SNS wins in non-active tissues and constricts.",
+                source: "Regulation_of_Blood_Flow_and_Venous_Return_PDF.pdf, Page 22: \"In exercise, local factors win the battle in the active tissue and dilate. The SNS wins in the non-active tissues and constricts.\""
+            },
+            {
+                section: "Regulation of Blood Flow & Venous Return",
+                maskedLO: "LO 2: Explain how tissue vasodilator metabolites \"battle\" against blood pressure control...",
+                fullLO: "LO 2: Explain how tissue vasodilator metabolites \"battle\" against blood pressure control vasoconstrictor systems to determine flood flow in resting tissue, active tissue, and in shock.",
+                question: "In a patient suffering from severe hemorrhagic shock, blood pressure drops dangerously low. The body's priority becomes maintaining pressure to perfusion vital organs. In this state, which regulatory system dominates in most peripheral tissues (skin, gut, kidney)?",
+                options: {
+                    A: "Autoregulation",
+                    B: "Local metabolic control",
+                    C: "Myogenic dilation",
+                    D: "Sympathetic vasoconstriction",
+                    E: "Venous dilation"
+                },
+                correctAnswer: "D",
+                rationale: "In shock, BP control is activated so strongly that the SNS (plus Angiotensin II and vasopressin) wins everywhere (except brain and heart) to maintain pressure.",
+                source: "Regulation_of_Blood_Flow_and_Venous_Return_PDF.pdf, Page 22: \"In shock BP control is activated so strongly that the SNS... win everywhere (except brain and heart).\""
+            },
+            {
+                section: "Regulation of Blood Flow & Venous Return",
+                maskedLO: "LO 3: Describe \"Mean Systemic Filling Pressure\"...",
+                fullLO: "LO 3: Describe “Mean Systemic Filling Pressure\" and how it plays a major role in determining venous return. Explain how venous capacitance can be regulated and how it affects MSFP to control venous return. Explain how blood volume affects MSFP and VR.",
+                question: "Mean Systemic Filling Pressure (MSFP) is experimentally defined as the pressure in the circulation when:",
+                options: {
+                    A: "Blood volume is zero",
+                    B: "Cardiac output is maximal",
+                    C: "The heart is stopped and flow is zero",
+                    D: "Venous return is maximal",
+                    E: "Ventricular pressure is zero"
+                },
+                correctAnswer: "C",
+                rationale: "MSFP is the pressure required to stop venous return (venous return = 0). It represents the pressure in the system when the heart is stopped and flow ceases.",
+                source: "Regulation_of_Blood_Flow_and_Venous_Return_PDF.pdf, Page 60: \"When RAP is high enough to stop venous return (bring it to 0), that is equal to 'Mean Systemic Filling Pressure' (MSFP).\""
+            },
+            {
+                section: "Regulation of Blood Flow & Venous Return",
+                maskedLO: "LO 3: Describe \"Mean Systemic Filling Pressure\"...",
+                fullLO: "LO 3: Describe “Mean Systemic Filling Pressure\" and how it plays a major role in determining venous return. Explain how venous capacitance can be regulated and how it affects MSFP to control venous return. Explain how blood volume affects MSFP and VR.",
+                question: "Administration of a venodilator drug like nitroglycerine increases the capacitance of the large veins. Assuming blood volume is constant, what is the effect on Mean Systemic Filling Pressure (MSFP) and venous return?",
+                options: {
+                    A: "MSFP decreases, Venous Return decreases",
+                    B: "MSFP decreases, Venous Return increases",
+                    C: "MSFP increases, Venous Return decreases",
+                    D: "MSFP increases, Venous Return increases",
+                    E: "MSFP remains unchanged, Venous Return decreases"
+                },
+                correctAnswer: "A",
+                rationale: "Increasing capacitance (dilation) lowers MSFP. Since MSFP drives venous return (ΔP=MSFP−RAP), a lower MSFP reduces venous return.",
+                source: "Regulation_of_Blood_Flow_and_Venous_Return_PDF.pdf, Page 34: \"Nitroglycerine is mainly a venodilator, which increases venous capacitance to decrease venous return & preload\""
+            },
+            {
+                section: "Regulation of Blood Flow & Venous Return",
+                maskedLO: "LO 4: Use the CO/VR curves to show the integrative mechanism...",
+                fullLO: "LO 4: Use the CO/VR curves to show the integrative mechanism for the pre-exercise condition of the circulation and for the actual increase in cardiac output once activity, or exercise, begins. (Once we learn about the Frank-Starling law of the heart, you should be able to show the same thing using ventricular pressure/volume loops.)",
+                question: "On a graph plotting Venous Return vs. Right Atrial Pressure, dilation of the arterioles (decreased resistance) results in which change to the venous return curve?",
+                options: {
+                    A: "A parallel shift to the left",
+                    B: "A parallel shift to the right",
+                    C: "A pivot upward (increased slope) around the MSFP",
+                    D: "A pivot downward (decreased slope) around the MSFP",
+                    E: "No change in the curve"
+                },
+                correctAnswer: "C",
+                rationale: "Changing arteriole resistance changes ONLY the slope of the venous return curve. Dilation increases the slope (pivots up). MSFP does not change.",
+                source: "Regulation_of_Blood_Flow_and_Venous_Return_PDF.pdf, Page 46: \"Changing radius of arterioles... changes ONLY the slope of the venous return curve... The venous return curve pivots on the MSFP point like a windshield wiper.\""
+            },
+            {
+                section: "Regulation of Blood Flow & Venous Return",
+                maskedLO: "LO 4: Use the CO/VR curves to show the integrative mechanism...",
+                fullLO: "LO 4: Use the CO/VR curves to show the integrative mechanism for the pre-exercise condition of the circulation and for the actual increase in cardiac output once activity, or exercise, begins. (Once we learn about the Frank-Starling law of the heart, you should be able to show the same thing using ventricular pressure/volume loops.)",
+                question: "When plotting both Cardiac Output and Venous Return curves on the same graph, the \"equilibrium point\" represents the actual operating point of the cardiovascular system. During exercise, what happens to this equilibrium point compared to rest?",
+                options: {
+                    A: "It shifts to a higher Cardiac Output and higher Right Atrial Pressure",
+                    B: "It shifts to a higher Cardiac Output and lower Right Atrial Pressure",
+                    C: "It shifts to a lower Cardiac Output and higher Right Atrial Pressure",
+                    D: "It shifts to a lower Cardiac Output and lower Right Atrial Pressure",
+                    E: "It remains at the same Cardiac Output"
+                },
+                correctAnswer: "A",
+                rationale: "During exercise, the venous return curve slope increases (dilation) and the cardiac output curve shifts up (contractility). The intersection (equilibrium) moves up (higher CO) and slightly right (higher RAP/filling). Note: Lecture slide 54 explicitly shows the intersection at a higher RAP (point B) compared to rest (point A).",
+                source: "Regulation_of_Blood_Flow_and_Venous_Return_PDF.pdf, Page 54: \"Right Atrial Pressure increased from A to B... increased tissue blood flow and venous return, increases cardiac output\""
+            },
+
+            // --- Section 3: Heart Sounds and Auscultation ---
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 1: Describe the valves associated with making S1 and S2 heart sounds.",
+                fullLO: "LO 1: Describe the valves associated with making S1 and S2 heart sounds.",
+                question: "The first heart sound (S1 or \"Lub\") is generated by the closure of which valves?",
+                options: {
+                    A: "Aortic and Mitral",
+                    B: "Aortic and Pulmonic",
+                    C: "Mitral and Tricuspid",
+                    D: "Pulmonic and Tricuspid",
+                    E: "Tricuspid and Aortic"
+                },
+                correctAnswer: "C",
+                rationale: "S1 is caused by the closure of the atrioventricular (A-V) valves, which are the mitral and tricuspid valves.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 3: \"Lub (S1) = closure of the atrioventricular (A-V) valves... Mitral valve (left side) & Tricuspid valve (right side)\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 1: Describe the valves associated with making S1 and S2 heart sounds.",
+                fullLO: "LO 1: Describe the valves associated with making S1 and S2 heart sounds.",
+                question: "The second heart sound (S2 or \"Dub\") marks the end of systole and is generated by the closure of which valves?",
+                options: {
+                    A: "Atrioventricular valves",
+                    B: "Mitral and Tricuspid valves",
+                    C: "Semilunar valves (Aortic and Pulmonic)",
+                    D: "The Eustachian valve",
+                    E: "The valve of the coronary sinus"
+                },
+                correctAnswer: "C",
+                rationale: "S2 is caused by the closure of the semilunar valves (Aortic and Pulmonic).",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 3: \"Dub (S2) = closure of the semilunar valve... Aortic valve (left side) & Pulmonic valve ( right side)\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 2: Use proper stethoscope positioning and relative anatomy...",
+                fullLO: "LO 2: Use proper stethoscope positioning and relative anatomy to identify normal and abnormal hear sounds",
+                question: "To best detect a murmur associated with the aortic valve, the stethoscope should be placed at the:",
+                options: {
+                    A: "Apex of the heart",
+                    B: "Left 2nd intercostal space",
+                    C: "Left 5th intercostal space",
+                    D: "Right 2nd intercostal space",
+                    E: "Xiphoid process"
+                },
+                correctAnswer: "D",
+                rationale: "The auscultation position for the aortic valve is the right 2nd intercostal space.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 7: \"[Diagram labeled 'Auscultation position for aortic valve' at Right 2nd ICS]\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 2: Use proper stethoscope positioning and relative anatomy...",
+                fullLO: "LO 2: Use proper stethoscope positioning and relative anatomy to identify normal and abnormal hear sounds",
+                question: "A physician suspects mitral valve pathology. Where is the optimal location on the chest wall to auscultate the mitral valve?",
+                options: {
+                    A: "Left 2nd intercostal space",
+                    B: "Left 5th intercostal space, mid-clavicular line",
+                    C: "Left sternal border, 4th intercostal space",
+                    D: "Right 2nd intercostal space",
+                    E: "Suprasternal notch"
+                },
+                correctAnswer: "B",
+                rationale: "The auscultation position for the mitral valve is the left 5th intercostal space (apex).",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 7: \"[Diagram labeled 'Auscultation position for mitral valve' at Left 5th ICS]\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 3: Differentiate systolic and diastolic heart murmurs.",
+                fullLO: "LO 3: Differentiate systolic and diastolic heart murmurs.",
+                question: "A patient presents with a murmur that is heard during ventricular contraction (systole). Which of the following conditions could produce this systolic murmur?",
+                options: {
+                    A: "Aortic Regurgitation",
+                    B: "Mitral Regurgitation",
+                    C: "Mitral Stenosis",
+                    D: "Pulmonic Regurgitation",
+                    E: "Tricuspid Stenosis"
+                },
+                correctAnswer: "B",
+                rationale: "During systole, the mitral valve should be closed. If it leaks (regurgitation), a murmur occurs. Therefore, Mitral Regurgitation is a systolic murmur.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 10: \"Systolic murmurs – Mitral Regurgitation\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 3: Differentiate systolic and diastolic heart murmurs.",
+                fullLO: "LO 3: Differentiate systolic and diastolic heart murmurs.",
+                question: "A murmur is auscultated during the relaxation phase of the cardiac cycle (diastole). This finding is consistent with:",
+                options: {
+                    A: "Aortic Regurgitation",
+                    B: "Aortic Stenosis",
+                    C: "Mitral Prolapse",
+                    D: "Pulmonic Stenosis",
+                    E: "Tricuspid Regurgitation"
+                },
+                correctAnswer: "A",
+                rationale: "During diastole, the aortic valve should be closed. If it leaks (regurgitation), a murmur occurs. Therefore, Aortic Regurgitation is a diastolic murmur.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 17: \"Diastolic murmurs – Aortic Regurgitation\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 4: Understand the relationship between cardiac cycle, valve anatomy...",
+                fullLO: "LO 4: Understand the relationship between cardiac cycle, valve anatomy, and stenosis vs. regurgitation.",
+                question: "During systole, the aortic valve is open to allow blood ejection. If this valve is narrowed and fibrous, it creates turbulence and a loud murmur. This condition is known as:",
+                options: {
+                    A: "Aortic Regurgitation",
+                    B: "Aortic Stenosis",
+                    C: "Mitral Regurgitation",
+                    D: "Mitral Stenosis",
+                    E: "Tricuspid Stenosis"
+                },
+                correctAnswer: "B",
+                rationale: "Stenosis is turbulence through an open valve. The aortic valve is open during systole. Therefore, Aortic Stenosis is a systolic murmur.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Pages 13 & 23: \"Systolic murmurs – Aortic Stenosis... The blood is ejected through a small fibrous opening of the aortic valve.\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 4: Understand the relationship between cardiac cycle, valve anatomy...",
+                fullLO: "LO 4: Understand the relationship between cardiac cycle, valve anatomy, and stenosis vs. regurgitation.",
+                question: "During diastole, the mitral valve is open to allow ventricular filling. If this valve is obstructed or narrowed, it impedes flow and causes a murmur. This condition is:",
+                options: {
+                    A: "Aortic Regurgitation",
+                    B: "Aortic Stenosis",
+                    C: "Mitral Regurgitation",
+                    D: "Mitral Stenosis",
+                    E: "Pulmonic Stenosis"
+                },
+                correctAnswer: "D",
+                rationale: "Stenosis is turbulence through an open valve. The mitral valve is open during diastole. Therefore, Mitral Stenosis is a diastolic murmur.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 15: \"Diastolic murmurs – Mitral Stenosis\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 5: Be able to identify S3 and S4 heart sounds and what they mean.",
+                fullLO: "LO 5: Be able to identify S3 and S4 heart sounds and what they mean.",
+                question: "An S3 heart sound occurs during the rapid filling phase of the ventricle. While it can be normal in children, in older adults it is a sign of:",
+                options: {
+                    A: "Aortic stenosis",
+                    B: "Left Bundle Branch Block",
+                    C: "Mitral stenosis",
+                    D: "Pericardial effusion",
+                    E: "Volume overload / Heart failure"
+                },
+                correctAnswer: "E",
+                rationale: "S3 is caused by the inrushing of blood into a compliant ventricle. In older adults, it indicates volume overload and is a sign of cardiac disease.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 21: \"Older adults, heard in volume overload and is sign of cardiac disease\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 5: Be able to identify S3 and S4 heart sounds and what they mean.",
+                fullLO: "LO 5: Be able to identify S3 and S4 heart sounds and what they mean.",
+                question: "An S4 heart sound coincides with atrial contraction. This sound is produced when the atrium contracts against:",
+                options: {
+                    A: "A dilated ventricle",
+                    B: "A regurgitant valve",
+                    C: "A stenotic valve",
+                    D: "A stiff, non-compliant ventricle",
+                    E: "An empty ventricle"
+                },
+                correctAnswer: "D",
+                rationale: "S4 is produced when the atrium contracts against a stiff ventricle (e.g., ventricular hypertrophy).",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 22: \"S4... Produced when the atrium contract against a stiff ventricle.\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 6: Describe the basic physiology of abnormal heart and lung sounds.",
+                fullLO: "LO 6: Describe the basic physiology of abnormal heart and lung sounds.",
+                question: "Physiologic splitting of the S2 heart sound (A2 and P2) occurs during inspiration because:",
+                options: {
+                    A: "Inspiration decreases venous return to the right heart",
+                    B: "Inspiration increases stroke volume of the right ventricle, delaying pulmonic valve closure",
+                    C: "Inspiration increases systemic vascular resistance",
+                    D: "The aortic valve closes later than the pulmonic valve",
+                    E: "The mitral valve closes early"
+                },
+                correctAnswer: "B",
+                rationale: "Inspiration decreases intrathoracic pressure, increasing venous return to the right heart. The increased stroke volume delays the closure of the pulmonic valve, causing a split S2.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 26: \"The increased stroke volume for several beats delays the closure of the pulmonic valve.\""
+            },
+            {
+                section: "Heart Sounds and Auscultation",
+                maskedLO: "LO 6: Describe the basic physiology of abnormal heart and lung sounds.",
+                fullLO: "LO 6: Describe the basic physiology of abnormal heart and lung sounds.",
+                question: "In late-stage mitral stenosis, the left atrium becomes dilated due to increased pressure. This structural change increases the likelihood of developing which arrhythmia?",
+                options: {
+                    A: "Atrial fibrillation",
+                    B: "First-degree heart block",
+                    C: "Sinus tachycardia",
+                    D: "Ventricular fibrillation",
+                    E: "Ventricular tachycardia"
+                },
+                correctAnswer: "A",
+                rationale: "Left atrial dilation increases the distance electrical impulses must travel, leading to excitatory circus movements and atrial fibrillation.",
+                source: "Heart_Sounds_and_Murmurs_PDF.pdf, Page 25: \"Also causes left atrial dilation... Can cause development of excitatory circus movements = atrial fibrillation\""
+            },
+
+            // --- Section 4: Determinants of Stroke Volume and Cardiac Output ---
+            {
+                section: "Determinants of Stroke Volume and Cardiac Output",
+                maskedLO: "LO 1: Explain the Frank-Starling relationship...",
+                fullLO: "LO 1: Explain the Frank-Starling relationship in the context of the cardiac muscle length-tension relationship. Relate this to venous return, ventricular filling, and preload.",
+                question: "According to the Frank-Starling Law of the Heart, stretching the cardiac muscle fibers (increased filling) results in:",
+                options: {
+                    A: "Decreased ability to develop active tension",
+                    B: "Decreased cardiac output",
+                    C: "Decreased stroke volume",
+                    D: "Increased ability to develop active tension",
+                    E: "No change in contractile force"
+                },
+                correctAnswer: "D",
+                rationale: "Normal sarcomere length in cardiac muscle is suboptimal. Stretch (filling) moves the sarcomeres to a more optimal length, increasing the ability to develop active tension.",
+                source: "Determinants_of_Stroke_Volume_and_Cardiac_Output_PDF.pdf, Page 9: \"Therefore, stretch will increase the ability of the ventricle to develop active tension.\""
+            },
+            {
+                section: "Determinants of Stroke Volume and Cardiac Output",
+                maskedLO: "LO 1: Explain the Frank-Starling relationship...",
+                fullLO: "LO 1: Explain the Frank-Starling relationship in the context of the cardiac muscle length-tension relationship. Relate this to venous return, ventricular filling, and preload.",
+                question: "In the context of the Frank-Starling relationship, \"Preload\" is synonymous with:",
+                options: {
+                    A: "Afterload",
+                    B: "End Diastolic Volume (EDV)",
+                    C: "End Systolic Volume (ESV)",
+                    D: "Heart Rate",
+                    E: "Total Peripheral Resistance"
+                },
+                correctAnswer: "B",
+                rationale: "Preload is the volume of blood in the ventricle at the end of diastole (filling).",
+                source: "Determinants_of_Stroke_Volume_and_Cardiac_Output_PDF.pdf, Page 14: \"Preload = End Diastolic Volume\""
+            },
+            {
+                section: "Determinants of Stroke Volume and Cardiac Output",
+                maskedLO: "LO 2: Draw a ventricular pressure-volume loop... Label the phases...",
+                fullLO: "LO 2: Draw a ventricular pressure-volume loop and explain it in the context of the Frank-Starling and length-tension relationships. Label the phases and events of the cardiac cycle (e.g. systole/diastole, valve movement).",
+                question: "On a ventricular pressure-volume loop, the vertical line on the right side of the loop, where pressure rises while volume remains constant, represents:",
+                options: {
+                    A: "Ejection",
+                    B: "Isovolumic Contraction",
+                    C: "Isovolumic Relaxation",
+                    D: "Rapid Filling",
+                    E: "Reduced Filling"
+                },
+                correctAnswer: "B",
+                rationale: "This phase occurs after the mitral valve closes and before the aortic valve opens. The ventricle contracts (pressure rises) but volume does not change (isovolumic).",
+                source: "Determinants_of_Stroke_Volume_and_Cardiac_Output_PDF.pdf, Page 16: \"[Slide diagram showing vertical rise labeled 'Isovolumic Contraction']\""
+            },
+            {
+                section: "Determinants of Stroke Volume and Cardiac Output",
+                maskedLO: "LO 2: Draw a ventricular pressure-volume loop... Label the phases...",
+                fullLO: "LO 2: Draw a ventricular pressure-volume loop and explain it in the context of the Frank-Starling and length-tension relationships. Label the phases and events of the cardiac cycle (e.g. systole/diastole, valve movement).",
+                question: "The width of the ventricular pressure-volume loop corresponds to the difference between End Diastolic Volume and End Systolic Volume. This value is the:",
+                options: {
+                    A: "Cardiac Output",
+                    B: "Ejection Fraction",
+                    C: "Pulse Pressure",
+                    D: "Stroke Volume",
+                    E: "Venous Return"
+                },
+                correctAnswer: "D",
+                rationale: "SV = EDV - ESV. This is represented by the width of the PV loop.",
+                source: "Determinants_of_Stroke_Volume_and_Cardiac_Output_PDF.pdf, Page 18: \"[Diagram highlighting the width of the loop labeled 'Stroke volume']\""
+            },
+            {
+                section: "Determinants of Stroke Volume and Cardiac Output",
+                maskedLO: "LO 3: Diagram the effect of changes in preload, afterload, and contractility...",
+                fullLO: "LO 3: Diagram the effect of changes in preload, afterload, and contractility on the ventricular work loop and compare/contrast their effects on stroke volume.",
+                question: "If a patient experiences an acute increase in afterload (e.g., sudden spike in blood pressure), how does the ventricular pressure-volume loop change?",
+                options: {
+                    A: "The loop becomes wider (Stroke Volume increases)",
+                    B: "The loop becomes taller and narrower (Stroke Volume decreases)",
+                    C: "The loop shifts to the right (Preload increases)",
+                    D: "The loop shifts to the left (Preload decreases)",
+                    E: "The end-systolic volume decreases"
+                },
+                correctAnswer: "B",
+                rationale: "Increased afterload means the ventricle must generate more pressure to open the aortic valve. The contraction is limited by the Starling curve, so the ejection phase is shortened, and Stroke Volume decreases.",
+                source: "Determinants_of_Stroke_Volume_and_Cardiac_Output_PDF.pdf, Pages 35 & 36: \"Greater afterload means ventricular pressure must get higher before ejection can begin... SV decreases.\""
+            },
+            {
+                section: "Determinants of Stroke Volume and Cardiac Output",
+                maskedLO: "LO 3: Diagram the effect of changes in preload, afterload, and contractility...",
+                fullLO: "LO 3: Diagram the effect of changes in preload, afterload, and contractility on the ventricular work loop and compare/contrast their effects on stroke volume.",
+                question: "Sympathetic stimulation increases cardiac contractility. On a pressure-volume loop, this is depicted as:",
+                options: {
+                    A: "A shift to a new, left-shifted active tension curve (decreased End Systolic Volume)",
+                    B: "A shift to a new, right-shifted active tension curve (increased End Systolic Volume)",
+                    C: "An increase in End Diastolic Volume",
+                    D: "An increase in the duration of isovolumic relaxation",
+                    E: "A decrease in Stroke Volume"
+                },
+                correctAnswer: "A",
+                rationale: "Increased contractility shifts the active tension curve to the left, allowing the heart to eject more blood (lower ESV) for the same preload, thus increasing Stroke Volume.",
+                source: "Determinants_of_Stroke_Volume_and_Cardiac_Output_PDF.pdf, Pages 29 & 32: \"There is a 'new' left-shifted Frank-Starling active tension curve... end-systolic volume is less!\""
+            },
+            {
+                section: "Determinants of Stroke Volume and Cardiac Output",
+                maskedLO: "LO 4: Use the CO/VR curves to plot the independent effects...",
+                fullLO: "LO 4: Use the CO/VR curves to plot the independent effects of arteriole resistance changes and blood volume changes on venous return and cardiac output. Show the same thing on the ventricular pressure/volume loops",
+                question: "When analyzing the Venous Return curve, a parallel shift of the entire curve to the right indicates:",
+                options: {
+                    A: "A decrease in blood volume",
+                    B: "A decrease in venous capacitance (constriction)",
+                    C: "An increase in arteriolar resistance",
+                    D: "An increase in venous capacitance (dilation)",
+                    E: "No change in Mean Systemic Filling Pressure"
+                },
+                correctAnswer: "B",
+                rationale: "Decreased capacitance (constriction of large veins) or increased blood volume increases MSFP. This causes a parallel shift of the venous return curve to the right.",
+                source: "Determinants_of_Stroke_Volume_and_Cardiac_Output_PDF.pdf, Page 48: \"Increased Blood Volume or decreased circulatory Capacitance... parallel shift in the curve\""
+            },
+            {
+                section: "Determinants of Stroke Volume and Cardiac Output",
+                maskedLO: "LO 4: Use the CO/VR curves to plot the independent effects...",
+                fullLO: "LO 4: Use the CO/VR curves to plot the independent effects of arteriole resistance changes and blood volume changes on venous return and cardiac output. Show the same thing on the ventricular pressure/volume loops",
+                question: "Dilation of arterioles (decreased Total Peripheral Resistance) affects the Venous Return curve by:",
+                options: {
+                    A: "Decreasing the Mean Systemic Filling Pressure",
+                    B: "Decreasing the slope of the curve",
+                    C: "Increasing the Mean Systemic Filling Pressure",
+                    D: "Increasing the slope of the curve (rotating upward)",
+                    E: "Shifting the curve parallel to the left"
+                },
+                correctAnswer: "D",
+                rationale: "Changing resistance changes the slope of the venous return curve. Dilation (decreased resistance) makes it easier for blood to return, increasing the slope (pivots upward/right).",
+                source: "Determinants_of_Stroke_Volume_and_Cardiac_Output_PDF.pdf, Page 47: \"Changing radius of arterioles... changes ONLY the slope... dilation of arterioles [increases slope]\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.textContent = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.textContent = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const [key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    span.textContent = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.textContent = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
