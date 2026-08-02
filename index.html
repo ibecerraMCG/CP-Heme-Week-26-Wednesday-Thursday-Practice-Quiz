@@ -1391,7 +1391,7 @@ function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); 
 const sections = [];
 quizData.forEach(q => { if (!sections.includes(q.section)) sections.push(q.section); });
 function shortLabel(name) {
-    const map = {};
+    const map = {"Circulatory and Capillary Hemodynamics":"Circulatory Hemodynamics","Regulation of Blood Flow & Venous Return":"Blood Flow & Venous Return","Determinants of Stroke Volume and Cardiac Output":"Stroke Volume & Cardiac Output"};
     return map[name] || name;
 }
 window.__bbShortLabel = shortLabel;
